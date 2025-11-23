@@ -24,7 +24,15 @@
     <!-- Video Container -->
     <div id="videoContainer" class="video-container">
         <div class="video-wrapper">
-            <video id="videoPlayer" class="video-player" playsinline></video>
+            <video id="videoPlayer" class="video-player" playsinline muted></video>
+        </div>
+    </div>
+    
+    <!-- Click to enable overlay -->
+    <div id="enableOverlay" class="enable-overlay">
+        <div class="enable-message">
+            <h2>Click anywhere to enable video playback</h2>
+            <p>Browser requires user interaction for autoplay</p>
         </div>
     </div>
 
@@ -36,8 +44,21 @@
         const videoContainer = document.getElementById('videoContainer');
         const videoPlayer = document.getElementById('videoPlayer');
         const videoController = new VideoController(videoPlayer, null);
+        const enableOverlay = document.getElementById('enableOverlay');
 
         let currentState = null;
+        let playbackEnabled = false;
+
+        // Enable playback on user interaction
+        enableOverlay.addEventListener('click', () => {
+            playbackEnabled = true;
+            enableOverlay.style.display = 'none';
+            console.log('Playback enabled by user interaction');
+            // Try to play if we're in playing state
+            if (state.playbackState === 'playing') {
+                updateUI();
+            }
+        });
 
         // Automatic Fullscreen Logic
         function enterFullscreen() {
@@ -104,7 +125,11 @@
                         console.log('Card not loaded, loading now');
                         videoController.loadCard(card);
                     }
-                    videoController.play();
+                    if (playbackEnabled) {
+                        videoController.play();
+                    } else {
+                        console.log('Playback not enabled yet - waiting for user interaction');
+                    }
                 }
             }
         }
