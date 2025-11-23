@@ -388,6 +388,10 @@ body.display-mode .card-label {
   display: none;
 }
 
+body.display-mode .video-title {
+  display: none;
+}
+
 /* Open Display Button */
 .open-display-btn {
   position: absolute;
