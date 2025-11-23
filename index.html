@@ -50,11 +50,15 @@
     </button>
   </div>
 
+  <!-- Hidden audio player for presenter -->
+  <audio id="audioPlayer" style="display: none;"></audio>
+
   <script src="app.js"></script>
   <script>
     // Presenter-specific logic
     const state = new EndgameState();
     const cardsGrid = document.getElementById('cardsGrid');
+    const audioPlayer = document.getElementById('audioPlayer');
 
     // Render cards
     function renderCards() {
@@ -110,13 +114,24 @@
     function handleRightArrow() {
       console.log('Right arrow pressed. Current state:', state.playbackState);
       if (state.playbackState === 'paused') {
-        // Play video (on display)
+        // Play video (on display) and audio (on presenter)
         console.log('Calling playVideo()');
         state.playVideo();
         console.log('State after playVideo():', state.playbackState);
+        
+        // Play audio on presenter
+        const card = getCardById(state.selectedCard);
+        if (card && card.video) {
+          audioPlayer.src = card.video;
+          audioPlayer.currentTime = 0;
+          audioPlayer.play().catch(e => console.error('Error playing audio:', e));
+          console.log('Playing audio on presenter:', card.name);
+        }
       } else if (state.playbackState === 'playing') {
         // Return to grid
         console.log('Returning to grid');
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0;
         state.returnToGrid();
         updateUI();
       }
