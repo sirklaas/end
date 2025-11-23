@@ -31,9 +31,6 @@
     <!-- End Title Container -->
     <div id="endTitleContainer" class="endtitle-container">
         <img src="endtitle.gif" alt="End Title" class="endtitle-background">
-        <audio id="endTitleAudio" style="display: none;">
-            <source src="Lawineboys.m4a" type="audio/mp4">
-        </audio>
     </div>
 
     <script src="app.js"></script>
@@ -45,10 +42,8 @@
         const videoPlayer = document.getElementById('videoPlayer');
         const videoController = new VideoController(videoPlayer, null);
         const endTitleContainer = document.getElementById('endTitleContainer');
-        const endTitleAudio = document.getElementById('endTitleAudio');
 
         let currentState = null;
-        let endTitleAudioStarted = false;
 
         // Automatic Fullscreen Logic
         function enterFullscreen() {
@@ -132,16 +127,6 @@
                 videoContainer.classList.remove('active');
                 endTitleContainer.classList.add('active');
                 videoController.reset();
-                
-                // Play audio after 13 second delay
-                if (!endTitleAudioStarted) {
-                    endTitleAudioStarted = true;
-                    setTimeout(() => {
-                        endTitleAudio.play().catch(e => {
-                            console.log('End title audio autoplay blocked:', e);
-                        });
-                    }, 13000);
-                }
             }
         }
 

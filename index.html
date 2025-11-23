@@ -53,6 +53,11 @@
 
   <!-- Hidden audio player for presenter -->
   <audio id="audioPlayer" style="display: none;"></audio>
+  
+  <!-- End title audio player -->
+  <audio id="endTitleAudioPlayer" style="display: none;">
+    <source src="Lawineboys.m4a" type="audio/mp4">
+  </audio>
 
   <script src="app.js"></script>
   <script>
@@ -60,6 +65,7 @@
     const state = new EndgameState();
     const cardsGrid = document.getElementById('cardsGrid');
     const audioPlayer = document.getElementById('audioPlayer');
+    const endTitleAudioPlayer = document.getElementById('endTitleAudioPlayer');
 
     // Render cards
     function renderCards() {
@@ -149,6 +155,13 @@
       // Set state to show end title
       state.showEndTitle();
       console.log('End title triggered');
+      
+      // Play audio on presenter after 2 second delay
+      setTimeout(() => {
+        endTitleAudioPlayer.currentTime = 0;
+        endTitleAudioPlayer.play().catch(e => console.error('Error playing end title audio:', e));
+        console.log('End title audio playing on presenter');
+      }, 2000);
     }
 
     // End Title Button Click Handler
