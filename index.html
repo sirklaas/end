@@ -17,6 +17,7 @@
 <body>
   <div class="container">
     <header class="header">
+      <a href="display.html" target="_blank" class="open-display-btn">Open Display ↗</a>
       <h1>Endgame Presenter</h1>
     </header>
 
@@ -37,11 +38,16 @@
         <span class="key">→</span>
         <span>Return to Grid</span>
       </div>
-      <div class="instruction-item">
-        <span class="key">R</span>
-        <span>Reset All</span>
-      </div>
     </div>
+
+    <button id="resetBtn" class="reset-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+        <path d="M3 3v5h5" />
+      </svg>
+      Reset All
+    </button>
   </div>
 
   <!-- Video Container -->
@@ -105,9 +111,16 @@
         e.preventDefault();
         handleRightArrow();
       } else if (e.key === 'r' || e.key === 'R') {
+        // Optional: Keep keyboard shortcut or remove it if button is preferred
         e.preventDefault();
         handleReset();
       }
+    });
+
+    // Reset Button Click Handler
+    document.getElementById('resetBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      handleReset();
     });
 
     function handleRightArrow() {

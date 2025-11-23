@@ -2,14 +2,14 @@
 
 // Card Configuration
 const cards = [
-  { id: 'bedrieglijk', name: 'Bedrieglijk', image: 'bedrieglijk.webp', video: 'bedrieglijk.m4v' },
-  { id: 'beschermend', name: 'Beschermend', image: 'beschermend.webp', video: null },
-  { id: 'creatief', name: 'Creatief', image: 'creatief.webp', video: null },
-  { id: 'dapper', name: 'Dapper', image: 'dapper.webp', video: null },
-  { id: 'doorzetter', name: 'Doorzetter', image: 'doorzetter.webp', video: null },
-  { id: 'sinister', name: 'Sinister', image: 'sinister.webp', video: null },
-  { id: 'vreugdevol', name: 'Vreugdevol', image: 'vreugdevol.webp', video: null },
-  { id: 'wreed', name: 'Wreed', image: 'wreed.webp', video: null }
+  { id: 'bedrieglijk', name: 'Bedrieglijk', image: 'bedriegelijk.webp', video: 'bedrieglijk.m4v' },
+  { id: 'beschermend', name: 'Beschermend', image: 'beschermend.webp', video: 'beschermend.m4v' },
+  { id: 'creatief', name: 'Creatief', image: 'creatief.webp', video: 'creatief.m4v' },
+  { id: 'dapper', name: 'Dapper', image: 'dapper.webp', video: 'dapper.m4v' },
+  { id: 'doorzetter', name: 'Doorzetter', image: 'doorzetter.webp', video: 'doorzetter.m4v' },
+  { id: 'sinister', name: 'Sinister', image: 'sinister.webp', video: 'sinister.m4v' },
+  { id: 'vreugdevol', name: 'Vreugdevol', image: 'vreugdevol.webp', video: 'vreugdevol.m4v' },
+  { id: 'wreed', name: 'Wreed', image: 'wreed.webp', video: 'wreed.m4v' }
 ];
 
 // State Management
