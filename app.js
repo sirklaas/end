@@ -115,11 +115,13 @@ class VideoController {
   async play() {
     if (this.currentCard && this.currentCard.video) {
       try {
+        console.log('Playing video:', this.currentCard.name);
         this.video.currentTime = 0;
         if (this.title) {
           this.title.classList.add('hidden');
         }
         await this.video.play();
+        console.log('Video playing successfully');
         return true;
       } catch (e) {
         console.error('Error playing video:', e);

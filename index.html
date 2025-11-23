@@ -108,11 +108,15 @@
     });
 
     function handleRightArrow() {
+      console.log('Right arrow pressed. Current state:', state.playbackState);
       if (state.playbackState === 'paused') {
         // Play video (on display)
+        console.log('Calling playVideo()');
         state.playVideo();
+        console.log('State after playVideo():', state.playbackState);
       } else if (state.playbackState === 'playing') {
         // Return to grid
+        console.log('Returning to grid');
         state.returnToGrid();
         updateUI();
       }

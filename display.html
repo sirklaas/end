@@ -73,6 +73,7 @@
 
         // Update UI based on state
         function updateUI() {
+            console.log('Display updateUI called. State:', state.playbackState, 'Card:', state.selectedCard);
             renderCards();
 
             // Update selected card highlighting
@@ -83,20 +84,24 @@
 
             // Handle video display
             if (state.playbackState === 'grid') {
+                console.log('State: grid - resetting video');
                 videoContainer.classList.remove('active');
                 videoController.reset();
             } else if (state.playbackState === 'paused') {
+                console.log('State: paused - loading card');
                 const card = getCardById(state.selectedCard);
                 if (card) {
                     videoContainer.classList.add('active');
                     videoController.loadCard(card);
                 }
             } else if (state.playbackState === 'playing') {
+                console.log('State: playing - attempting to play video');
                 const card = getCardById(state.selectedCard);
                 if (card) {
                     videoContainer.classList.add('active');
                     // Ensure card is loaded before playing
                     if (videoController.currentCard?.id !== card.id) {
+                        console.log('Card not loaded, loading now');
                         videoController.loadCard(card);
                     }
                     videoController.play();
