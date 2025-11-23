@@ -24,7 +24,6 @@
     <!-- Video Container -->
     <div id="videoContainer" class="video-container">
         <div class="video-wrapper">
-            <h2 id="videoTitle" class="video-title"></h2>
             <video id="videoPlayer" class="video-player" playsinline></video>
         </div>
     </div>
@@ -36,10 +35,29 @@
         const cardsGrid = document.getElementById('cardsGrid');
         const videoContainer = document.getElementById('videoContainer');
         const videoPlayer = document.getElementById('videoPlayer');
-        const videoTitle = document.getElementById('videoTitle');
-        const videoController = new VideoController(videoPlayer, videoTitle);
+        const videoController = new VideoController(videoPlayer, null);
 
         let currentState = null;
+
+        // Automatic Fullscreen Logic
+        function enterFullscreen() {
+            const elem = document.documentElement;
+            if (!document.fullscreenElement) {
+                elem.requestFullscreen().catch(err => {
+                    console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            }
+        }
+
+        // Attempt on load
+        window.addEventListener('load', () => {
+            setTimeout(enterFullscreen, 1000);
+        });
+
+        // Fallback: Click anywhere to enter fullscreen
+        document.addEventListener('click', () => {
+            enterFullscreen();
+        });
 
         // Render cards
         function renderCards() {
@@ -74,7 +92,15 @@
                     videoController.loadCard(card);
                 }
             } else if (state.playbackState === 'playing') {
-                videoController.play();
+                const card = getCardById(state.selectedCard);
+                if (card) {
+                    videoContainer.classList.add('active');
+                    // Ensure card is loaded before playing
+                    if (videoController.currentCard?.id !== card.id) {
+                        videoController.loadCard(card);
+                    }
+                    videoController.play();
+                }
             }
         }
 
