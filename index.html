@@ -18,6 +18,7 @@
   <div class="container">
     <header class="header">
       <a href="display.html" target="_blank" class="open-display-btn">Open Display ↗</a>
+      <button id="endTitleBtn" class="endtitle-btn">Show End Title</button>
       <h1>Endgame Presenter</h1>
     </header>
 
@@ -143,6 +144,18 @@
         updateUI();
       }
     }
+
+    function handleEndTitle() {
+      // Set state to show end title
+      state.showEndTitle();
+      console.log('End title triggered');
+    }
+
+    // End Title Button Click Handler
+    document.getElementById('endTitleBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      handleEndTitle();
+    });
 
     // Update UI based on state
     function updateUI() {

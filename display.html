@@ -28,6 +28,14 @@
         </div>
     </div>
 
+    <!-- End Title Container -->
+    <div id="endTitleContainer" class="endtitle-container">
+        <img src="endtitle.gif" alt="End Title" class="endtitle-background">
+        <audio id="endTitleAudio" style="display: none;">
+            <source src="Lawineboys.m4a" type="audio/mp4">
+        </audio>
+    </div>
+
     <script src="app.js"></script>
     <script>
         // Display-specific logic (synchronized with presenter)
@@ -36,8 +44,11 @@
         const videoContainer = document.getElementById('videoContainer');
         const videoPlayer = document.getElementById('videoPlayer');
         const videoController = new VideoController(videoPlayer, null);
+        const endTitleContainer = document.getElementById('endTitleContainer');
+        const endTitleAudio = document.getElementById('endTitleAudio');
 
         let currentState = null;
+        let endTitleAudioStarted = false;
 
         // Automatic Fullscreen Logic
         function enterFullscreen() {
@@ -89,6 +100,7 @@
                 console.log('State: grid - resetting video');
                 videoContainer.classList.remove('active');
                 container.classList.remove('video-active');
+                endTitleContainer.classList.remove('active');
                 videoController.reset();
             } else if (state.playbackState === 'paused') {
                 console.log('State: paused - loading card');
@@ -96,6 +108,7 @@
                 if (card) {
                     container.classList.add('video-active');
                     videoContainer.classList.add('active');
+                    endTitleContainer.classList.remove('active');
                     videoController.loadCard(card);
                 }
             } else if (state.playbackState === 'playing') {
@@ -104,6 +117,7 @@
                 if (card) {
                     container.classList.add('video-active');
                     videoContainer.classList.add('active');
+                    endTitleContainer.classList.remove('active');
                     // Ensure card is loaded before playing
                     if (videoController.currentCard?.id !== card.id) {
                         console.log('Card not loaded, loading now');
@@ -111,6 +125,22 @@
                     }
                     console.log('Video element paused?', videoPlayer.paused, 'currentTime:', videoPlayer.currentTime, 'duration:', videoPlayer.duration);
                     videoController.play();
+                }
+            } else if (state.playbackState === 'endtitle') {
+                console.log('State: endtitle - showing end title');
+                container.classList.add('video-active');
+                videoContainer.classList.remove('active');
+                endTitleContainer.classList.add('active');
+                videoController.reset();
+                
+                // Play audio after 13 second delay
+                if (!endTitleAudioStarted) {
+                    endTitleAudioStarted = true;
+                    setTimeout(() => {
+                        endTitleAudio.play().catch(e => {
+                            console.log('End title audio autoplay blocked:', e);
+                        });
+                    }, 13000);
                 }
             }
         }

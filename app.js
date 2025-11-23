@@ -78,6 +78,12 @@ class EndgameState {
     this.saveState();
   }
 
+  showEndTitle() {
+    this.selectedCard = null;
+    this.playbackState = 'endtitle';
+    this.saveState();
+  }
+
   isCardUsed(cardId) {
     return this.usedCards.has(cardId);
   }

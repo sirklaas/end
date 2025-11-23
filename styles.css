@@ -469,6 +469,35 @@ body.display-mode .video-title {
   border-color: var(--accent-primary);
 }
 
+/* End Title Button */
+.endtitle-btn {
+  position: absolute;
+  top: 2rem;
+  right: 12rem;
+  background: rgba(139, 92, 246, 0.2);
+  border: 1px solid var(--accent-secondary);
+  color: var(--accent-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(5px);
+  z-index: 100;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.endtitle-btn:hover {
+  background: rgba(139, 92, 246, 0.4);
+  color: var(--text-primary);
+  border-color: var(--accent-secondary);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
 /* Reset Button */
 .reset-btn {
   position: fixed;
@@ -506,6 +535,31 @@ body.display-mode .video-title {
 /* Hide header in display mode */
 body.display-mode .header {
   display: none;
+}
+
+/* End Title Container */
+.endtitle-container {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+
+.endtitle-container.active {
+  display: flex;
+  animation: videoFadeIn 1.5s ease forwards;
+}
+
+.endtitle-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Enable Overlay for Display Mode */
