@@ -82,15 +82,19 @@
                 updateCardVisuals(cardElement, cardId, state);
             });
 
+            const container = document.querySelector('.container');
+
             // Handle video display
             if (state.playbackState === 'grid') {
                 console.log('State: grid - resetting video');
                 videoContainer.classList.remove('active');
+                container.classList.remove('video-active');
                 videoController.reset();
             } else if (state.playbackState === 'paused') {
                 console.log('State: paused - loading card');
                 const card = getCardById(state.selectedCard);
                 if (card) {
+                    container.classList.add('video-active');
                     videoContainer.classList.add('active');
                     videoController.loadCard(card);
                 }
@@ -98,6 +102,7 @@
                 console.log('State: playing - attempting to play video');
                 const card = getCardById(state.selectedCard);
                 if (card) {
+                    container.classList.add('video-active');
                     videoContainer.classList.add('active');
                     // Ensure card is loaded before playing
                     if (videoController.currentCard?.id !== card.id) {
