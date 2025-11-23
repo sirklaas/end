@@ -96,10 +96,20 @@ class VideoController {
 
     if (card.video) {
       // Has video - load and show first frame
+      console.log('Loading video:', card.video);
       this.video.src = card.video;
       this.video.load();
       this.video.currentTime = 0;
       this.video.style.display = 'block';
+      
+      // Log when video is ready
+      this.video.addEventListener('loadeddata', () => {
+        console.log('Video loaded and ready:', card.name, 'duration:', this.video.duration);
+      }, { once: true });
+      
+      this.video.addEventListener('error', (e) => {
+        console.error('Video load error:', card.video, e);
+      }, { once: true });
     } else {
       // No video - use static image
       this.video.style.display = 'none';
