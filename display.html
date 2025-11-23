@@ -30,8 +30,9 @@
 
     <!-- End Title Container -->
     <div id="endTitleContainer" class="endtitle-container">
-        <img src="endtitle.gif" alt="End Title" class="endtitle-background">
-        <img src="end.png" alt="End" class="endtitle-overlay">
+        <video id="endTitleVideo" class="endtitle-video" playsinline muted autoplay loop>
+            <source src="end.m4v" type="video/mp4">
+        </video>
     </div>
 
     <script src="app.js"></script>
@@ -43,6 +44,7 @@
         const videoPlayer = document.getElementById('videoPlayer');
         const videoController = new VideoController(videoPlayer, null);
         const endTitleContainer = document.getElementById('endTitleContainer');
+        const endTitleVideo = document.getElementById('endTitleVideo');
 
         let currentState = null;
 
@@ -128,6 +130,11 @@
                 videoContainer.classList.remove('active');
                 endTitleContainer.classList.add('active');
                 videoController.reset();
+                
+                // Play end title video
+                endTitleVideo.play().catch(e => {
+                    console.log('End title video autoplay blocked:', e);
+                });
             }
         }
 

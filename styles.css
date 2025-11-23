@@ -554,35 +554,16 @@ body.display-mode .header {
   animation: videoFadeIn 1.5s ease forwards;
 }
 
-.endtitle-background {
-  position: absolute;
-  inset: 0;
+.endtitle-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 1;
-}
-
-.endtitle-overlay {
-  position: relative;
-  z-index: 2;
-  max-width: 80%;
-  max-height: 80%;
-  object-fit: contain;
   opacity: 0;
-  transform: scale(0.8);
-  animation: overlayFadeIn 1.5s ease 0.5s forwards;
+  transform: scale(0.95);
 }
 
-@keyframes overlayFadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.endtitle-container.active .endtitle-video {
+  animation: videoGrow 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 /* Enable Overlay for Display Mode */
