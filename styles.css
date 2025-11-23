@@ -385,7 +385,7 @@ body.display-mode .cards-grid {
 }
 
 body.display-mode .card-label {
-  font-size: 2.2rem;
+  display: none;
 }
 
 /* Open Display Button */
