@@ -38,19 +38,6 @@
         const videoController = new VideoController(videoPlayer, null);
 
         let currentState = null;
-        let hasUnmuted = false;
-
-        // Unmute after first successful play
-        videoPlayer.addEventListener('play', () => {
-            if (!hasUnmuted) {
-                // Wait a tiny bit then unmute
-                setTimeout(() => {
-                    videoPlayer.muted = false;
-                    hasUnmuted = true;
-                    console.log('Video unmuted after first play');
-                }, 100);
-            }
-        });
 
         // Automatic Fullscreen Logic
         function enterFullscreen() {
@@ -117,6 +104,7 @@
                         console.log('Card not loaded, loading now');
                         videoController.loadCard(card);
                     }
+                    console.log('Video element paused?', videoPlayer.paused, 'currentTime:', videoPlayer.currentTime, 'duration:', videoPlayer.duration);
                     videoController.play();
                 }
             }
